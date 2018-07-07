@@ -1,14 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
-class AlbumView extends Component {
+const styles = theme => ({
 
-    render() {
-        return (
-            <div>
-                Album View
-            </div>
-        )
-    }
+});
+
+function AlbumView(props) {
+
+    const { classes } = props;
+
+
+    return (
+        <div>
+            <Typography variant="display2" gutterBottom>
+                Albums
+            </Typography>
+        </div>
+    );
 }
 
-export default AlbumView;
+AlbumView.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(AlbumView);

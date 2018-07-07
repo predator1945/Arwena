@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 class PlaylistView extends Component {
 
     render() {
         return (
             <div>
-                Playlist view
+                <Typography variant="display2" gutterBottom>
+                    Playlists
+                </Typography>
             </div>
         )
     }
