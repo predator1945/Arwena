@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import SongView from './../SongsView/SongsView.component'
+import AddSong from './../AddSong/AddSong.component'
+
 import AlbumView from './../AlbumsView/AlbumView.component'
 import LandingPage from './../AdminLandingPage/AdminLandingPage.component'
 import PlaylistView from './../PlaylistView/PlaylistView.component'
@@ -42,7 +44,8 @@ function AdminPage(props) {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Route path="/admin/" exact={true} component={LandingPage} />
-                <Route path="/admin/songs" component={SongView} />
+                <Route path="/admin/songs" exact={true} component={SongView} />
+                <Route path="/admin/songs/add" component={AddSong} />
                 <Route path="/admin/albums" component={AlbumView} />
                 <Route path="/admin/playlists" component={PlaylistView} />
             </main>

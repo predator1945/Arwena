@@ -12,6 +12,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AlbumIcon from '@material-ui/icons/Album';
 import PlaylistIcon from '@material-ui/icons/QueueMusic';
 import SongIcon from '@material-ui/icons/MusicNote';
+import Collapse from '@material-ui/core/Collapse';
+import StarBorder from '@material-ui/icons/StarBorder';
+
+
+import ListSubheader from '@material-ui/core/ListSubheader';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -52,7 +62,9 @@ function DrawerComponent(props) {
             }}>
 
             <div className={classes.toolbar} />
-            <DrawerMenu />
+            {/* <DrawerMenu /> */}
+            <NestedListXd />
+
         </Drawer>
     )
 }
@@ -64,53 +76,117 @@ Drawer.propTypes = {
 
 export default withStyles(styles)(DrawerComponent);
 
-
-const stylesForList = theme => ({
+const stylesForNestedList = theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
     },
+    nested: {
+        paddingLeft: theme.spacing.unit * 4,
+    },
 });
 
-function DrawerMenuComponent(props) {
-    const { classes } = props;
-    return (
-        <div className={classes.root}>
-            <List component="nav">
-                <ListItem button
-                onClick={() => history.push("/admin/albums")}
-                >
-                    <ListItemIcon>
-                        <AlbumIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Albums" />
-                </ListItem>
-                <ListItem button
-                onClick={() => history.push("/admin/playlists")}
-                >
-                    <ListItemIcon>
-                        <PlaylistIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Playlist" />
-                </ListItem>
-                <ListItem button
-                onClick={() => history.push("/admin/songs")}
-                >
-                    <ListItemIcon>
-                        <SongIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Songs" />
-                </ListItem>
-            </List>
-            <Divider />
+class NestedList extends React.Component {
+    state = {
+        openSongs: false,
+        openAlbums: true,
+        openPlaylists: true,
+    };
 
-        </div>
-    );
+    handleClick = (menuItem) => {
+        switch (menuItem) {
+            case "songs":
+                this.setState(state => ({ openSongs: !state.openSongs }));
+                break;
+            case "playlists":
+                this.setState(state => ({ openPlaylists: !state.openPlaylists }));
+                break;
+            case "albums":
+                this.setState(state => ({ openAlbums: !state.openAlbums }));
+                break;
+        }
+    };
+
+    render() {
+        const { classes } = this.props;
+
+        console.log(history.location.pathname);
+        return (
+            <div className={classes.root}>
+                <List
+                    component="nav"
+                    subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
+                >
+
+
+                    <ListItem button
+                        onClick={() => {
+                            history.push("/admin/albums")
+                        }}>
+                        <ListItemIcon>
+                            <AlbumIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Albums" />
+                        {this.state.openSongs ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={history.location.pathname == '/admin/albums'} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}>
+
+                                <ListItemText inset primary="Add" />
+                            </ListItem>
+                        </List>
+                    </Collapse>
+
+                    <ListItem button
+                        onClick={() => {
+                            history.push("/admin/playlists")
+                        }}>
+                        <ListItemIcon>
+                            <PlaylistIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Playlists" />
+                        {this.state.openSongs ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={history.location.pathname == '/admin/playlists'} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}>
+
+                                <ListItemText inset primary="Add" />
+                            </ListItem>
+                        </List>
+                    </Collapse>
+
+                    <ListItem button
+                        onClick={() => {
+                            history.push("/admin/songs")
+                        }}>
+                        <ListItemIcon>
+                            <SongIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Songs" />
+                        {this.state.openSongs ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={history.location.pathname == '/admin/songs'} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}
+                                onClick={() => {
+                                    history.push("/admin/songs/add")
+                                }}                          >
+
+                                <ListItemText inset primary="Add" />
+                            </ListItem>
+                        </List>
+                    </Collapse>
+                </List>
+            </div>
+        );
+    }
 }
 
-DrawerMenuComponent.propTypes = {
+NestedList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const DrawerMenu = withStyles(stylesForList)(DrawerMenuComponent);
+const NestedListXd = withStyles(stylesForNestedList)(NestedList);

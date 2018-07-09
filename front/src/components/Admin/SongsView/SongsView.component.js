@@ -4,6 +4,34 @@ import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import FolderIcon from '@material-ui/icons/Folder';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        maxWidth: 752,
+    },
+    demo: {
+        backgroundColor: theme.palette.background.paper,
+        width: "80%"
+    },
+    title: {
+        margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+    },
+});
+
 class SongsView extends Component {
 
     uploadFile() {
@@ -17,34 +45,46 @@ class SongsView extends Component {
         })
     }
     render() {
+
+        const { classes } = this.props;
+
         return (
             <div>
                 <Typography variant="display2" gutterBottom>
                     Songss
                 </Typography>
                 <TextField
-                    id="file"
-                    label="Name"
+                    id="uncontrolled"
+                    label="Search"
+                    defaultValue=""
                     margin="normal"
-                    type="file"
                 />
-                xx
-                <Button variant="contained" color="secondary"
-                    onClick={() => this.uploadFile()}
-                >
-                    Upload
-                </Button>
-                {/* <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <div class="custom-file mb-3">
-                        <input type="file" name="file" id="file" class="custom-file-input" />
-                        <label for="file" class="custom-file-label">Choose File</label>
-                    </div>
-                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
-                </form> */}
-                <hr />
+
+                <div className={classes.demo} >
+                    <List dense={true}>
+
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <FolderIcon />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary="Single-line item"
+                                secondary='Secondary text'
+                            />
+                            <ListItemSecondaryAction>
+                                <IconButton aria-label="Delete">
+                                    <DeleteIcon />
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>
+
+                    </List>
+                </div>
             </div>
         )
     }
 }
 
-export default SongsView;
+export default withStyles(styles)(SongsView);
