@@ -3,8 +3,8 @@ import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import SongView from './../SongsView/SongsView.component'
-import AddSong from './../AddSong/AddSong.component'
+import SongView from './../Songs/ListSongs.component'
+import AddSong from './../Songs/AddSong.component'
 
 import AlbumView from './../AlbumsView/AlbumView.component'
 import LandingPage from './../AdminLandingPage/AdminLandingPage.component'
