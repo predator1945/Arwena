@@ -94,20 +94,6 @@ class NestedList extends React.Component {
         openPlaylists: true,
     };
 
-    handleClick = (menuItem) => {
-        switch (menuItem) {
-            case "songs":
-                this.setState(state => ({ openSongs: !state.openSongs }));
-                break;
-            case "playlists":
-                this.setState(state => ({ openPlaylists: !state.openPlaylists }));
-                break;
-            case "albums":
-                this.setState(state => ({ openAlbums: !state.openAlbums }));
-                break;
-        }
-    };
-
     render() {
         const { classes } = this.props;
 
@@ -173,6 +159,28 @@ class NestedList extends React.Component {
                             <ListItem button className={classes.nested}
                                 onClick={() => {
                                     history.push("/admin/songs/add")
+                                }}                          >
+
+                                <ListItemText inset primary="Add" />
+                            </ListItem>
+                        </List>
+                    </Collapse>
+
+                    <ListItem button
+                        onClick={() => {
+                            history.push("/admin/artists")
+                        }}>
+                        <ListItemIcon>
+                            <SongIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Artists" />
+                        {this.state.openSongs ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={history.location.pathname == '/admin/artists'} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}
+                                onClick={() => {
+                                    history.push("/admin/artists/add")
                                 }}                          >
 
                                 <ListItemText inset primary="Add" />

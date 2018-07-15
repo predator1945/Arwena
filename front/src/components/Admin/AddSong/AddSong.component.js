@@ -24,7 +24,7 @@ class SongsView extends Component {
                 </Typography>
                 <input
                     accept="image/*"
-                    style={{"display": "none"}}
+                    style={{ "display": "none" }}
                     id="contained-button-file"
                     multiple
                     type="file"
@@ -34,7 +34,10 @@ class SongsView extends Component {
                         File
                      </Button>
                 </label>
-                xx
+
+                
+
+                <br />
                 <Button variant="contained" color="secondary"
                     onClick={() => this.uploadFile()}
                 >

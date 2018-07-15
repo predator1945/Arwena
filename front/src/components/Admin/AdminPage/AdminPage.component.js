@@ -9,9 +9,10 @@ import AddSong from './../AddSong/AddSong.component'
 import AlbumView from './../AlbumsView/AlbumView.component'
 import LandingPage from './../AdminLandingPage/AdminLandingPage.component'
 import PlaylistView from './../PlaylistView/PlaylistView.component'
-
 import Navbar from './../Navbar/Navbar.component'
 import Drawer from './../Drawer/Drawer.component'
+import ArtistView from './../Artists/ArtistsView.component';
+import AddArtist from '../Artists/AddArtist.component';
 
 const styles = theme => ({
     root: {
@@ -48,6 +49,8 @@ function AdminPage(props) {
                 <Route path="/admin/songs/add" component={AddSong} />
                 <Route path="/admin/albums" component={AlbumView} />
                 <Route path="/admin/playlists" component={PlaylistView} />
+                <Route path="/admin/artists/add" component={AddArtist} />
+                <Route path="/admin/artists" exact={true} component={ArtistView} />
             </main>
 
         </div>
