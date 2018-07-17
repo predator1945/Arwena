@@ -1,17 +1,28 @@
 
 const repository = (db) => {
-    
+
     const collection = db.collection('artists');
 
-    getAllArtists = () => {
+    const getAllArtists = () => {
         return new Promise((resolve, reject) => {
-            const artists = collection.find({});
 
-            resolve(artists)
+            const artists = []
+            const cursor = collection.find({})
+            const addArtist = (artist) => {
+                artists.push(artist)
+            }
+            const sendArtists = (err) => {
+                if (err) {
+                    reject(new Error('An error occured fetching all artists, err:' + err))
+                }
+                resolve(artists.slice())
+            }
+            cursor.forEach(addArtist, sendArtists);
         })
     }
 
-    addArtist = (artist) => {
+
+    const addArtist = (artist) => {
         return new Promise((resolve, reject) => {
             collection.insertOne(artist, (err, res));
 
@@ -20,6 +31,16 @@ const repository = (db) => {
             resolve(res)
         })
     }
+
+    const disconnect = () => {
+        db.close()
+    }
+
+    return Object.create({
+        getAllArtists,
+        addArtist,
+        disconnect
+    })
 }
 
 const connect = (connection) => {

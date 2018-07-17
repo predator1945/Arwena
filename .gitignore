@@ -1,0 +1,7 @@
+/front/node_modules
+backend/adminAPI/node_modules/
+backend/uploadService/node_modules/
+front/public/
+front/yarn-error.log
+front/yarn.lock
+

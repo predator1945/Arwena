@@ -5,6 +5,8 @@ const getMongoURL = (options) => {
     return `mongodb://${user}:${pass}@${address}`
 }
 
+// const getMongoURL = (options) => 'mongodb://me:trudne12@ds153948.mlab.com:53948/heroku_ct5hg0wm'
+
 const connect = (options, mediator) => {
     mediator.once('boot.ready', () => {
         MongoClient.connect(
@@ -12,7 +14,6 @@ const connect = (options, mediator) => {
             (err, db) => {
                 if (err) mediator.emit('db.error');
 
-                console.log(db.db('db'))
                 mediator.emit('db.ready', db.db('db'))
             }
         )
