@@ -11,7 +11,7 @@ import LandingPage from './../AdminLandingPage/AdminLandingPage.component'
 import PlaylistView from './../PlaylistView/PlaylistView.component'
 import Navbar from './../Navbar/Navbar.component'
 import Drawer from './../Drawer/Drawer.component'
-import ArtistView from './../Artists/ArtistsView.component';
+import ArtistView from './../Artists/List/ArtistsList.component';
 import AddArtist from '../Artists/AddArtist.component';
 
 const styles = theme => ({

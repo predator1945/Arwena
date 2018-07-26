@@ -6,7 +6,7 @@ const dbSettings = {
 }
 
 const serverSettings = {
-    port: 3000,
+    port: 4000,
 }
 
 module.exports = Object.assign({}, { dbSettings, serverSettings });

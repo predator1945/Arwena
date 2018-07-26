@@ -8,7 +8,6 @@ class AddArtist extends Component {
 
     state = {
         name: "",
-
     }
 
     handleOnClick(type) {
@@ -19,7 +18,7 @@ class AddArtist extends Component {
                 break
 
             case "add":
-
+                
                 break;
         }
     }

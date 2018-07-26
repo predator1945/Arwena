@@ -4,4 +4,7 @@ backend/uploadService/node_modules/
 front/public/
 front/yarn-error.log
 front/yarn.lock
+backend/adminAPI/npm-debug.log
+
+
 

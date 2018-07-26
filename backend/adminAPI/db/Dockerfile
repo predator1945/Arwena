@@ -1,0 +1,6 @@
+FROM mongo:4.0
+
+ENV 
+
+EXPOSE 27017
+
