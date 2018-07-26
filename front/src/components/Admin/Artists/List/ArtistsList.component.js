@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchArtists } from './../Artists.actions'
+import { fetchArtists, fetchedArtists } from './../Artists.actions'
 import ListEntry from './ArtistsListEntry.component'
 
 import Typography from '@material-ui/core/Typography';
@@ -21,11 +21,17 @@ class ArtistView extends Component {
 
 
     componentDidMount() {
-        this.props.fetchArtists();
+        // this.props.dispatch(this.props.fetchArtists());
+        this.props.fetchArtists()
+        // this.props.fetchedArtists([{name:'xddd'}, {name: 'xddd'}])
     }
 
     displayList() {
-        return this.props.artists.map(artist => (<ListEntry artist={artist} />))
+        // console.log(this.props)
+        if(!this.props.admin.artists || this.props.admin.artists.length === 0) return (<div>Nothing to display </div>)
+        return this.props.admin.artists.map(artist => (<ListEntry
+             artist={artist}
+              />))
     }
 
 
@@ -40,7 +46,7 @@ class ArtistView extends Component {
                 <div>
                     <Grid container spacing={32}>
                         <Grid item xs={12} md={12}>
-                            {/* {this.displayList()} */}
+                            {this.displayList()}
                         </Grid>
                     </Grid>
                 </div>
@@ -59,7 +65,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     fetchArtists,
-
+    fetchedArtists
 }
 
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import history from './../../../history'
+import { addArtist } from './Artists.actions'
 
 class AddArtist extends Component {
 
@@ -18,7 +20,8 @@ class AddArtist extends Component {
                 break
 
             case "add":
-                
+                console.log(12)
+                this.props.addArtist(this.state.name);
                 break;
         }
     }
@@ -50,7 +53,9 @@ class AddArtist extends Component {
                 >
                     Cancel
                 </Button>
-                <Button variant="contained" color="primary" >
+                <Button variant="contained" color="primary"
+                    onClick={() => this.handleOnClick("add")}
+                >
                     Add
                  </Button>
 
@@ -59,5 +64,13 @@ class AddArtist extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
 
-export default AddArtist;
+    }
+}
+const mapDispatchToProps = {
+    addArtist
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddArtist);

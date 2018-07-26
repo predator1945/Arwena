@@ -1,5 +1,6 @@
 
 const repository = (db) => {
+    // db.createCollection("artits")
 
     const collection = db.collection('artists');
 
@@ -24,11 +25,13 @@ const repository = (db) => {
 
     const addArtist = (artist) => {
         return new Promise((resolve, reject) => {
-            collection.insertOne(artist, (err, res));
+            collection.insertOne(artist, (err, res) => {
+                if (err) reject(err);
+                console.log(res)
+                resolve(res)
+            });
 
-            if (err) reject(err);
 
-            resolve(res)
         })
     }
 

@@ -5,14 +5,17 @@ module.exports = (app, options) => {
 
 
     app.get('/api/admin/artists', (req, res, next) => {
+        repo.getAllArtists().then(res => console.log(res))
         repo.getAllArtists()
             .then(artists => {res.json(artists)})
             .catch(next)
     })
 
-    app.post('/api/admin/artists', (req, res) => {
-        repo.addArtist(req.body.artist)
-            .then(info => res.json(info))
+    app.post('/api/admin/artists', (req, res, next) => {
+        console.log(req.body)
+        repo.addArtist({name: req.body.name})
+            .then(info => res.json(info.insertedId))
+            .catch(next)
     })
 
     app.get('*', (req, res) => {

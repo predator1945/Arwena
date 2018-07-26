@@ -28,7 +28,7 @@ class ArtistListEntry extends Component {
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Single-line item"
+                    primary={this.props.artist.name}
                     secondary={'Secondary text'}
                 />
                 <ListItemSecondaryAction>
