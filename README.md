@@ -1,3 +1,3 @@
 # Arwena
 
-Simple online streaming service
+Simple online music streaming service

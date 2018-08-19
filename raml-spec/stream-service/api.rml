@@ -1,0 +1,27 @@
+#%RAML 1.0
+title: Streaming Service
+version: v1
+baseUri: /stream
+
+types:
+  Song:
+    properties: 
+
+
+
+resourceTypes:
+  GET:
+    get:
+      responses:
+        200:
+          body:
+            media:
+              type: <<Item>>
+
+
+
+
+/{id}:
+  type:   { GET: {item: Song} }
+
+

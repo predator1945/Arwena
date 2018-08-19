@@ -1,0 +1,59 @@
+#%RAML 1.0
+title: Auth Service
+version: v1
+baseUri: /auth
+
+types:
+  User:
+    properties: 
+      username: string
+      email: string
+      verified: boolean
+      roles: UserRoles
+
+  Role:
+    properties:
+      id:  string
+      name: string
+
+  UserRoles:
+    properties:
+      Roles: Role[]  
+
+  MsgResponse:
+    properties:
+      Msg: string
+      err: string
+
+
+resourceTypes:
+  GET:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<item>>
+
+  POST:
+    post:
+      body:
+        application/json:
+          type: <<item>>
+      responses:
+        201:
+          body:
+            application/json:
+              type: object
+
+
+
+/login:
+  type:   { POST: {item: User} }
+
+/register:
+  type:   { POST: {item: MsgResponse }
+    
+/verifyEmail/{id}:
+  type:   { GET: {item: MsgResponse }
+
