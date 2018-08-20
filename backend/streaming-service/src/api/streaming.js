@@ -1,12 +1,14 @@
 'use strict'
+const fs = require("fs")
+module.exports = ((app, options) => {
 
-module.exports = ((repo, app) => {
+
     app.get("/:id", (req, res) => {
 
         const {id} = req.params
         let song = `songs/${id}.mp3`
         let stat = fs.statSync(song);
-        range = req.headers.range;
+        const range = req.headers.range;
         let readStream;
 
         if (range !== undefined) {
@@ -29,13 +31,13 @@ module.exports = ((repo, app) => {
                 'Content-Range': "bytes " + start + "-" + end + "/" + stat.size
             });
 
-            readStream = fs.createReadStream(music, { start: start, end: end });
+            readStream = fs.createReadStream(song, { start: start, end: end });
         } else {
             res.header({
                 'Content-Type': 'audio/mpeg',
                 'Content-Length': stat.size
             });
-            readStream = fs.createReadStream(music, null);
+            readStream = fs.createReadStream(song, null);
         }
         readStream.pipe(res);
     })
