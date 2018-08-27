@@ -1,3 +1,30 @@
+'use strict'
+const { EventEmitter } = require('events')
+const mediator = new EventEmitter()
+const repository = require('./repository');
+const config = require('./config');
+
+console.log('--- Microservice ---');
+console.log('Connecting to files repository...');
+
+let gfs
+
+mediator.on('db.ready', (conn) => {
+    conn.once('open', () => {
+        // Init stream
+        gfs = Grid(conn.db, mongoose.mongo);
+        gfs.collection('uploads');
+    });
+});
+
+mediator.on('db.error', (err) => {
+    console.error(err)
+});
+
+config.db.connect(config.dbSettings, mediator)
+
+mediator.emit('boot.ready')
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -13,7 +40,8 @@ const app = express();
 app.use(bodyParser.json());
 
 
-console.log('--- Microservice ---');
+
+
 
 
 const mongoURI = 'mongodb://me:trudne12@ds153948.mlab.com:53948/heroku_ct5hg0wm';
