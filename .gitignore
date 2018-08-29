@@ -1,4 +1,5 @@
-/front/node_modules
+node_modules/
+npm-debug.log
 backend/adminAPI/node_modules/
 backend/uploadService/node_modules/
 backend/streaming-service/node_modules
