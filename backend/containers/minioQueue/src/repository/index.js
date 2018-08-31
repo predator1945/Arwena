@@ -13,7 +13,7 @@ const repository = (client) => {
         const id = makeBucket();
         console.log(`id1: ${id}`)
 
-        client.presignedPutObject(id, req.query.name, (err, url) => {
+        client.presignedPutObject(id, name, (err, url) => {
             if (err) throw err
             console.log(`id2: ${id}`)
             //res.json({url, id});
@@ -28,7 +28,7 @@ const repository = (client) => {
 
 const connect = (client) => {
     return new Promise((resolve, reject) => {
-        if (!connection) {
+        if (!client) {
             reject(new Error('Minio client do not supplied!'))
         }
         resolve(repository(client))

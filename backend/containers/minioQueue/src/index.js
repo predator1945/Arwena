@@ -4,6 +4,7 @@ const mediator = new EventEmitter()
 const config = require('./config/')
 
 const server = require('./server')
+console.log(server)
 const repository = require('./repository/')
 
 console.log('--- Minio Microservice ---');
@@ -14,7 +15,8 @@ mediator.on('minio.ready', client => {
     .then(repo => {
         console.log('Minio client connected. Starting server...');
 
-        return server.setMaxListeners({
+        console.log(server)
+        return server.start({
             port: config.serverSettings.port,
             repo
         })
@@ -23,44 +25,44 @@ mediator.on('minio.ready', client => {
         console.log(`Server started succesfully, running on port: ${config.serverSettings.port}.`)
     })
 });
-
+console.log(config)
 config.minio.connect(config.minioSettings, mediator)
 
 mediator.emit('boot.ready')
 
 
-const Minio = require('minio')
-const uuid = require('uuid/v4');
+// const Minio = require('minio')
+// const uuid = require('uuid/v4');
 
 
-const client = new Minio.Client({
-    endPoint: 'localhost',
-    port: 9000,
-    useSSL: false,
-    accessKey: 'AKIAIOSFODNN7EXAMPLE',
-    secretKey: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
-})
+// const client = new Minio.Client({
+//     endPoint: 'localhost',
+//     port: 9000,
+//     useSSL: false,
+//     accessKey: 'AKIAIOSFODNN7EXAMPLE',
+//     secretKey: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+// })
 
-const makeBucket = () => {
-    const id = uuid();
-    client.makeBucket(id, err => console.log(`err: ${err}`));
-    return id;
-}
+// const makeBucket = () => {
+//     const id = uuid();
+//     client.makeBucket(id, err => console.log(`err: ${err}`));
+//     return id;
+// }
 
 
-const express = require('express')()
+// const express = require('express')()
 
-express.get('/presignedUrl', (req, res) => {
-    console.log(`req.query: ${req.query}`)
-    const id = makeBucket();
-    console.log(`id1: ${id}`)
-    client.presignedPutObject(id, req.query.name, (err, url) => {
-        if (err) throw err
-    console.log(`id2: ${id}`)
-        //res.json({url, id});
-        res.end(url)
-    })
-});
+// express.get('/presignedUrl', (req, res) => {
+//     console.log(`req.query: ${req.query}`)
+//     const id = makeBucket();
+//     console.log(`id1: ${id}`)
+//     client.presignedPutObject(id, req.query.name, (err, url) => {
+//         if (err) throw err
+//     console.log(`id2: ${id}`)
+//         //res.json({url, id});
+//         res.end(url)
+//     })
+// });
 
 
 // client.makeBucket('files', 'us-east-1', function (err) {
@@ -71,12 +73,12 @@ express.get('/presignedUrl', (req, res) => {
 
 // });
 
-const metaData = {
-    'Content-Type': 'text/html',
-    'Content-Language': 123,
-    'X-Amz-Meta-Testing': 1234,
-    'example': 5678
-  }
+// const metaData = {
+//     'Content-Type': 'text/html',
+//     'Content-Language': 123,
+//     'X-Amz-Meta-Testing': 1234,
+//     'example': 5678
+//   }
 //   const file = '/home/ja/1.txt'
 // // Using fPutObject API upload your file to the bucket europetrip.
 // client
@@ -90,8 +92,8 @@ const metaData = {
 //     res.end("xddd")
 // });
 
-express.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-})
+// express.get('/', (req, res) => {
+//     res.sendFile(__dirname + '/index.html');
+// })
 
-express.listen(8080)
+// express.listen(8080)
