@@ -2,10 +2,10 @@ const Minio = require('minio')
 
 
 const connect = (settings, mediator) => {
-    mediator.once('boot.ready', () => {
+    mediator.once('queue.ready', () => {
         let client = null;
-        client = new Minio.Client(settings)
 
+        client = new Minio.Client(settings)
         if(client !== null) {
             mediator.emit('minio.ready', client);
         } else {

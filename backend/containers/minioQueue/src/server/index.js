@@ -10,6 +10,10 @@ const start = (options) => {
 
         api(app, options);
 
+        app.get('/', (req, res) => {
+            res.sendFile(__dirname + '/index.html');
+        })
+
         const server = app.listen(options.port, () => resolve(server));
     })
 }

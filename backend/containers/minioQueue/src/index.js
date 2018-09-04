@@ -1,53 +1,46 @@
 'use strict'
-const {EventEmitter} = require('events')
+const { EventEmitter } = require('events')
 const mediator = new EventEmitter()
 const config = require('./config/')
 
 const server = require('./server')
-console.log(server)
 const repository = require('./repository/')
 
 console.log('--- Minio Microservice ---');
-console.log('Connecting to Minio instance');
+console.log('Connecting to queue');
+
+let queue = null;
+
+mediator.on('queue.ready', q => {
+    console.log('Cinnected to queue. Connecting to minio...');
+    queue = q;    
+})
 
 mediator.on('minio.ready', client => {
-    repository.connect(client)
-    .then(repo => {
-        console.log('Minio client connected. Starting server...');
+    repository.connect(client, queue)
+        .then(repo => {
+            console.log('Minio client connected. Starting server...');
 
-        console.log(server)
-        return server.start({
-            port: config.serverSettings.port,
-            repo
+            return server.start({
+                port: config.serverSettings.port,
+                repo,
+                queue
+            })
         })
-    })
-    .then(app => {
-        console.log(`Server started succesfully, running on port: ${config.serverSettings.port}.`)
-    })
+        .then(app => {
+            console.log(`Server started succesfully, running on port: ${config.serverSettings.port}.`)
+        })
 });
-console.log(config)
+
+mediator.on('queue.err', err => console.log(err))
+
+config.queue.connect(config.qSettings, mediator);
 config.minio.connect(config.minioSettings, mediator)
+
 
 mediator.emit('boot.ready')
 
 
-// const Minio = require('minio')
-// const uuid = require('uuid/v4');
-
-
-// const client = new Minio.Client({
-//     endPoint: 'localhost',
-//     port: 9000,
-//     useSSL: false,
-//     accessKey: 'AKIAIOSFODNN7EXAMPLE',
-//     secretKey: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
-// })
-
-// const makeBucket = () => {
-//     const id = uuid();
-//     client.makeBucket(id, err => console.log(`err: ${err}`));
-//     return id;
-// }
 
 
 // const express = require('express')()
@@ -91,9 +84,3 @@ mediator.emit('boot.ready')
 
 //     res.end("xddd")
 // });
-
-// express.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/index.html');
-// })
-
-// express.listen(8080)

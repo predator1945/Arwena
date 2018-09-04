@@ -1,5 +1,7 @@
-const { minioSettings, serverSettings} = require('./settings')
+const { minioSettings, serverSettings, qSettings} = require('./settings')
 const minio = require('./minio')
+const queue = require('./queue')
 
-module.exports = Object.assign({}, {minio, minioSettings, serverSettings});
+
+module.exports = Object.assign({}, {minio,queue,  minioSettings, serverSettings, qSettings});
 

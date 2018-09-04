@@ -10,4 +10,11 @@ const serverSettings = {
     port: process.env.PORT || 3000,
 }
 
-module.exports = Object.assign({}, { minioSettings, serverSettings });
+const qSettings = {
+    username: 'guest',
+    password: 'guest',
+    url: 'localhost',
+    name: 'video'
+}
+
+module.exports = Object.assign({}, { minioSettings, serverSettings, qSettings });
