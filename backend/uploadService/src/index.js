@@ -1,133 +1,86 @@
 'use strict'
 const { EventEmitter } = require('events')
 const mediator = new EventEmitter()
-const repository = require('./repository');
-const config = require('./config');
+const config = require('./config/')
 
-console.log('--- Microservice ---');
-console.log('Connecting to files repository...');
+const server = require('./server')
+const repository = require('./repository/')
 
-let gfs
+console.log('--- Minio Microservice ---');
+console.log('Connecting to queue');
 
-mediator.on('db.ready', (conn) => {
-    conn.once('open', () => {
-        // Init stream
-        gfs = Grid(conn.db, mongoose.mongo);
-        gfs.collection('uploads');
-    });
+let queue = null;
+
+mediator.on('queue.ready', q => {
+    console.log('Cinnected to queue. Connecting to minio...');
+    queue = q;    
+})
+
+mediator.on('minio.ready', client => {
+    repository.connect(client, queue)
+        .then(repo => {
+            console.log('Minio client connected. Starting server...');
+
+            return server.start({
+                port: config.serverSettings.port,
+                repo,
+                queue
+            })
+        })
+        .then(app => {
+            console.log(`Server started succesfully, running on port: ${config.serverSettings.port}.`)
+        })
 });
 
-mediator.on('db.error', (err) => {
-    console.error(err)
-});
+mediator.on('queue.err', err => console.log(err))
 
-config.db.connect(config.dbSettings, mediator)
+config.queue.connect(config.qSettings, mediator);
+config.minio.connect(config.minioSettings, mediator)
+
 
 mediator.emit('boot.ready')
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const crypto = require('crypto');
-const mongoose = require('mongoose');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-
-const app = express();
-
-// Middleware
-app.use(bodyParser.json());
 
 
 
+// const express = require('express')()
+
+// express.get('/presignedUrl', (req, res) => {
+//     console.log(`req.query: ${req.query}`)
+//     const id = makeBucket();
+//     console.log(`id1: ${id}`)
+//     client.presignedPutObject(id, req.query.name, (err, url) => {
+//         if (err) throw err
+//     console.log(`id2: ${id}`)
+//         //res.json({url, id});
+//         res.end(url)
+//     })
+// });
 
 
+// client.makeBucket('files', 'us-east-1', function (err) {
+//     if (err) return console.log("err")
 
-const mongoURI = 'mongodb://me:trudne12@ds153948.mlab.com:53948/heroku_ct5hg0wm';
-
-
-const conn = mongoose.createConnection(mongoURI);
-// Init gfs
-let gfs;
-
-conn.once('open', () => {
-    // Init stream
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('uploads');
-});
+//     console.log('Bucket created successfully in "us-east-1".')
 
 
-// Create storage engine
-const storage = new GridFsStorage({
-    url: mongoURI,
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-            crypto.randomBytes(16, (err, buf) => {
-                if (err) {
-                    return reject(err);
-                }
-                const filename = buf.toString('hex') + path.extname(file.originalname);
-                const fileInfo = {
-                    filename: filename,
-                    bucketName: 'uploads'
-                };
-                resolve(fileInfo);
-            });
-        });
-    }
-});
-const upload = multer({ storage });
+// });
 
+// const metaData = {
+//     'Content-Type': 'text/html',
+//     'Content-Language': 123,
+//     'X-Amz-Meta-Testing': 1234,
+//     'example': 5678
+//   }
+//   const file = '/home/ja/1.txt'
+// // Using fPutObject API upload your file to the bucket europetrip.
+// client
+// .fPutObject('files', '1.txt', file, metaData, function (err, etag) {
+//     if (err) return console.log(err)
+//     console.log('File uploaded successfully.')
+// });
+// server.get('/presignedUrl', (req, res) => {
+//     console.log("xd")
 
-app.post('/upload', upload.single('file'), (req, res) => {
-    res.json({ file: req.file });
-});
-
-app.get('/files', (req, res) => {
-    gfs.files.find().toArray((err, files) => {
-        if (!files || files.length === 0) {
-            return res.status(404).json({
-                err: 'No files exist'
-            });
-        }
-
-        return res.json(files);
-    });
-});
-
-app.get('/files/:filename', (req, res) => {
-    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-        // Check if file
-        if (!file || file.length === 0) {
-            return res.status(404).json({
-                err: 'No file exists'
-            });
-        }
-
-        return res.json(file);
-    });
-});
-
-app.get('/music/:filename', (req, res) => {
-    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-        // Check if file
-        if (!file || file.length === 0) {
-            return res.status(404).json({
-                err: 'No file exists'
-            });
-        }
-
-        const readstream = gfs.createReadStream(file.filename);
-        readstream.pipe(res);
-
-    });
-});
-
-
-
-
-
-const port = 5000;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
+//     res.end("xddd")
+// });
