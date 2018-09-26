@@ -6,11 +6,8 @@ class LandingPage extends Component {
     render() {
         return (
             <div>
-                Landing Page
-                <button
-                    onClick={history.push("/admin")}
-                >
-                    admin</button>
+                
+                
             </div>
         )
     }
