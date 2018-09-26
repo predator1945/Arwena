@@ -1,0 +1,23 @@
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: antiquewhite;
+}
+
+.navigation {
+    background-color: #222326;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 100px;
+}
+
+.navigation svg {
+    fill: white;
+    width: 64px;
+    height: 64px;
+    
+    padding-left: calc(12.5vw - 16px);
+    padding-top: 10px;
+}
