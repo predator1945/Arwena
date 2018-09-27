@@ -1,8 +1,15 @@
+* {
+    font-family: Roboto;
+    color: white;
+}
+
+
 
 .container {
     width: 100vw;
-    height: 100vh;
-    background-color: antiquewhite;
+    height: calc(100vh - 100px);
+    background-color: #121212;
+    overflow-x: auto;
 }
 
 .navigation {
@@ -13,11 +20,44 @@
     height: 100px;
 }
 
-.navigation svg {
+/* .navigation svg {
     fill: white;
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     
-    padding-left: calc(12.5vw - 16px);
+    padding-left: calc((100vw - 4 * 56px) / 5);
     padding-top: 10px;
+} */
+
+.icon-element {
+    width: calc(100vw / 4);
+    height: 100px;
+    float: left;
+}
+
+.icon-svg {
+    width: 100%;
+    height: 60px;
+    padding-top: 10px;
+}
+
+.icon-element svg {
+    fill: white;
+    width: 56px;
+    height: 56px;
+    position: relative;
+    /* top: 15px; */
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.icon-element .icon-label {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-transform: capitalize;
+}
+
+.icon-element .icon-label span {
+    left: 50%;
 }
