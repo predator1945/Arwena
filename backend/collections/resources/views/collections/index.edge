@@ -1,0 +1,38 @@
+@layout('main')
+
+@section('content')
+<h1>Collections</h1>
+
+
+    @each(collection in collections)
+    <div class="collection">
+            <h3>{{ collection.title }}</h3>
+        </div>
+        <div>
+            <h4>{{ collection.description }} <h4>
+        </div>
+        <div class="row">
+            @each(album in collection.albums)
+            <div class="col ">
+                <div class="card">
+                <div class="card-image">
+                <img src="{{ album.cover }}">
+                    <span class="card-title">{{ album.title }}</span>
+                </div>
+                <div class="card-content">
+                <p>{{ album.artist }}</p>
+                </div>
+            </div>
+                </div>
+            
+            @endeach
+        </div>
+        <div>
+            
+            
+            
+        </div>
+    @endeach
+
+
+@endsection
