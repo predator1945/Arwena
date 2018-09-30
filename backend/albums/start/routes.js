@@ -16,4 +16,7 @@
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+Route.get('/', 'AlbumController.index')
+Route.get('/add', 'AlbumController.add')
+Route.post('/', 'AlbumController.store')
+Route.get('/cover/:id', 'AlbumController.cover')

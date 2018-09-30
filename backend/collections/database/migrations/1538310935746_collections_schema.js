@@ -8,7 +8,6 @@ class CollectionsSchema extends Schema {
       table.increments()
       table.string("title")
       table.string('description')
-      table.string('cover')
       table.timestamps()
     })
   }
