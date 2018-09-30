@@ -3,6 +3,7 @@
 @section('content')
 <h1>Collections</h1>
 
+<a class="waves-effect waves-light btn" href="/add">add</a>
 
     @each(collection in collections)
     <div class="collection">
@@ -16,7 +17,7 @@
             <div class="col ">
                 <div class="card">
                 <div class="card-image">
-                <img src="{{ album.cover }}">
+                    <img src="{{ album.cover }}">
                     <span class="card-title">{{ album.title }}</span>
                 </div>
                 <div class="card-content">
@@ -33,6 +34,11 @@
             
         </div>
     @endeach
-
+<style>
+ img {
+     width: 150px !important;
+     height: 150px;
+ }
+</style>
 
 @endsection

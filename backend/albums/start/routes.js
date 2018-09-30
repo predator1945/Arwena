@@ -16,9 +16,4 @@
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
-Route.get('/', 'CollectionController.index')
-
-Route.get('/add', 'CollectionController.add')
-
-Route.post('/coll', 'CollectionController.store')
-
+Route.on('/').render('welcome')

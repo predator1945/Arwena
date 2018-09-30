@@ -1,5 +1,7 @@
 'use strict'
 
+const Collection = use('App/Models/Collection')
+
 class CollectionController {
     async index({ view }) {
         const collection = {
@@ -35,11 +37,31 @@ class CollectionController {
 
             ]
         }
-        const collections = [collection, collection, collection, collection];
+        //const collections = [collection, collection, collection, collection];
+
+        const collections = await Collection.all();
 
         return view.render('collections.index', {
-            collections
+            collections: collections.toJSON()
         })
+    }
+
+    async add({ view }) {
+
+        return view.render('collections.add')
+    }
+
+    async store({ request, response }) {
+        const collection = new Collection()
+
+        console.log(request.post())
+
+        collection.title = request.input('title')
+        collection.description = request.input('description')
+
+        await collection.save()
+
+        return response.redirect('/');
     }
 }
 
