@@ -4,8 +4,15 @@
   "description": "Albums microservice",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/index.js"
   },
   "author": "Arkadiusz Szuflicki",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "helmet": "^3.14.0",
+    "http-status": "^1.2.0",
+    "mongodb": "~3.0.8",
+    "morgan": "^1.9.1"
+  }
 }
