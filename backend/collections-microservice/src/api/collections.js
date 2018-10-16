@@ -4,23 +4,23 @@ const status = require('http-status')
 module.exports = (app, options) => {
     const { repo } = options
 
-    app.get('/artists', (req, res, next) => {
+    app.get('/collections', (req, res, next) => {
         const { skip, limit } = req.params
-        repo.getAllArtists(skip, limit).then(artists => {
-            res.status(status.OK).json(artists)
+        repo.getAllCollections(skip, limit).then(collections => {
+            res.status(status.OK).json(collections)
         }).catch(next)
     })
 
-    app.get('/artists/premieras', (req, res, next) => {
+    app.get('/collections/premieras', (req, res, next) => {
         const { skip, limit } = req.params
-        repo.getArtistsPremieras(skip, limit).then(artists => {
-            res.status(status.OK).json(artists)
+        repo.getCollectionsPremieras(skip, limit).then(collections => {
+            res.status(status.OK).json(collections)
         }).catch(next)
     })
 
-    app.get('/artists/:id', (req, res, next) => {
-        repo.getAlbumById(req.params.id).then(artist => {
-            res.status(status.OK).json(artist)
+    app.get('/collections/:id', (req, res, next) => {
+        repo.getCollectionById(req.params.id).then(collection => {
+            res.status(status.OK).json(collection)
         }).catch(next)
     })
 }

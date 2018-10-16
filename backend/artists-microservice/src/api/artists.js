@@ -19,7 +19,7 @@ module.exports = (app, options) => {
     })
 
     app.get('/artists/:id', (req, res, next) => {
-        repo.getAlbumById(req.params.id).then(artist => {
+        repo.getArtistById(req.params.id).then(artist => {
             res.status(status.OK).json(artist)
         }).catch(next)
     })
