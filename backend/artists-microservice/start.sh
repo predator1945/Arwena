@@ -10,7 +10,7 @@ docker rmi artists --force
 docker build -t artists .
 
 
-docker run -p 80:80 --name artists -d artists
+docker run -p 3002:3002 --name artists -d artists
 docker logs -t -f artists
 # docker exec -it artists sh
 
