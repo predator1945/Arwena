@@ -1,3 +1,3 @@
-const {dockerSettings, serverSettings} = require('./config')
+const { dockerSettings, serverSettings } = require('./config')
 
-module.exports = Object.assign({}, {dockerSettings, serverSettings})
+module.exports = Object.assign({}, { dockerSettings, serverSettings })
