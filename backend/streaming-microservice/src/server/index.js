@@ -7,12 +7,12 @@ const start = (options) => {
       reject(new Error('The server must be started with an available port'))
     }
 
-    let app = express();
+    let app = express()
 
     api(app, options)
-    
+
     const server = app.listen(options.port, () => resolve(server))
   })
 }
 
-module.exports = Object.assign({}, {start})
+module.exports = Object.assign({}, { start })

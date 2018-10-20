@@ -10,7 +10,7 @@ docker rmi collections --force
 docker build -t collections .
 
 
-docker run -p 3003:3003 --name collections -d collections
+docker run -p 3003:3003 -l="route=/collections" -l="port=3003" --name collections -d collections
 docker logs -t -f collections
 # docker exec -it collections sh
 
