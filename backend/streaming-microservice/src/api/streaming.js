@@ -3,7 +3,7 @@ const fs = require("fs")
 module.exports = ((app, options) => {
 
 
-    app.get("/:id", (req, res) => {
+    app.get("/songs/:id", (req, res) => {
 
         const {id} = req.params
         let song = `songs/${id}.mp3`
