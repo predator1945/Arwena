@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navigation from '../Navigation/Navigation.component'
-import { Route } from 'react-router-dom';
-import Collections from './Collections/Collections.component'
+import { connect } from 'react-redux';
+import { fetchCollections } from './Collections.actions'
+import Carousel from './Carousel/Carousel.component'
 
 const carouselMock = {
     title: "Często odtwarzane",
@@ -46,30 +46,43 @@ const xd = [
     }
 ]
 
+class Collections extends Component {
 
-class Layout extends Component {
+    componentWillMount() {
+        this.props.fetchCollectionsData();
+        console.log(this.props)
+    }
 
     render() {
         return (
             <div>
 
-                <div className="container">
-                    <div className="content">
-                        <Route path="/" exact={true} component={Collections} />
-                    </div>
-                    <div className="player">
-                    </div>
-                    <div className="navigation">
-                        <Navigation />
-                    </div>
-                </div>
+                {this.props.list.map(col => {console.log(col)
+                    return (
+                        <Carousel key={col._id}
+                            data={col}
+                        />
 
+                    )
+                })}
 
             </div>
-        )
+        );
     }
-
-
 }
 
-export default Layout;
+function mapStateToProps(state) {
+    console.log('state update')
+    console.log(state)
+    return {
+        ...state.collections
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchCollectionsData: () => dispatch(fetchCollections())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Collections);

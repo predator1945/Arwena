@@ -20,15 +20,17 @@ class Carousel extends Component {
     }
 
     displayAlbums = (albums) => albums.map(album => (
-        <div className="carousel-album">
+        <div
+            key={album._id}
+            className="carousel-album">
             <div className="carousel-album_cover">
-                <img src={album.cover} />
+                <img src={`http://192.168.99.100:5000/covers/${album.cover_id}.jpg`} />
             </div>
             <div className="carousel-album_title">
-                {album.title}
+                {album.name}
             </div>
             <div className="carousel-album_info">
-                {(!album.artist) ? album.subs : album.artist}
+                {(!album.artist.name) ? album.subs : album.artist.name}
             </div>
 
         </div>

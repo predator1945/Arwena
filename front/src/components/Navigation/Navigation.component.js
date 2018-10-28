@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../styles/index.css'
 import Icon from './Icon.component'
-import history from './../../history'
+import history from '../../history'
 class Navigation extends Component {
 
 
