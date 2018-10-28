@@ -1,0 +1,26 @@
+audio {
+    display: none;
+}
+.player-content {
+    width: calc(100vw - 170px)
+}
+.player-controls {
+    height: 100px;
+    width: 150px;
+}
+.player-content, .player-controls {
+    display: inline-block;
+}
+
+.player-content img {
+    width: 100px;
+}
+
+.player-controls i {
+    font-size: 48px;
+    top: 20px;
+}
+.player-controls {
+    position: relative;
+    top: -26px;
+}

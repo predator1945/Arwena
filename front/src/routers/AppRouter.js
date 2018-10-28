@@ -9,7 +9,7 @@ const AppRouter = () => (
 
     <Router history={history}>
         <div>
-            <Route path="/" exact={true} component={Layout} />
+            <Route path="/" component={Layout} />
         </div>
     </Router>
 
