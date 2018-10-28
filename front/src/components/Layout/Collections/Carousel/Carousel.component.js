@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './carouselStyle.css'
+import history from './../../../../history'
 
 class Carousel extends Component {
 
@@ -23,7 +24,9 @@ class Carousel extends Component {
         <div
             key={album._id}
             className="carousel-album">
-            <div className="carousel-album_cover">
+            <div 
+            onClick={()=> history.push(`/albums/${album._id}`)}
+            className="carousel-album_cover">
                 <img src={`http://192.168.99.100:5000/covers/${album.cover_id}.jpg`} />
             </div>
             <div className="carousel-album_title">

@@ -1,51 +1,9 @@
 import React, { Component } from 'react';
 import Navigation from '../Navigation/Navigation.component'
+import Player from './../Player/Player.component'
 import { Route } from 'react-router-dom';
 import Collections from './Collections/Collections.component'
-
-const carouselMock = {
-    title: "Często odtwarzane",
-    description: "Twoje najczęsciej odtwarzane w tym miesiącu",
-    albums: [
-        {
-            title: "Album 1",
-            artist: "Katy Perry",
-            cover: "http://1.bp.blogspot.com/-DFtZ6n8yv6U/Twz13Kj2ybI/AAAAAAAABLs/GcTCavEv-lc/s1600/Katy_Perry.jpg"
-
-        }, {
-            title: "Album 1",
-            artist: "Katy Perry",
-            cover: "http://1.bp.blogspot.com/-DFtZ6n8yv6U/Twz13Kj2ybI/AAAAAAAABLs/GcTCavEv-lc/s1600/Katy_Perry.jpg"
-
-        }, {
-            title: "Album 1",
-            artist: "Katy Perry",
-            cover: "http://1.bp.blogspot.com/-DFtZ6n8yv6U/Twz13Kj2ybI/AAAAAAAABLs/GcTCavEv-lc/s1600/Katy_Perry.jpg"
-
-        }, {
-            title: "Album 1",
-            artist: "Katy Perry",
-            cover: "http://1.bp.blogspot.com/-DFtZ6n8yv6U/Twz13Kj2ybI/AAAAAAAABLs/GcTCavEv-lc/s1600/Katy_Perry.jpg"
-
-        }, {
-            title: "Album 1",
-            artist: "Katy Perry",
-            cover: "http://1.bp.blogspot.com/-DFtZ6n8yv6U/Twz13Kj2ybI/AAAAAAAABLs/GcTCavEv-lc/s1600/Katy_Perry.jpg"
-
-        },
-
-    ]
-}
-
-const xd = [
-    {
-        title: "Album 1",
-        artist: "Katy Perry",
-        cover: "http://1.bp.blogspot.com/-DFtZ6n8yv6U/Twz13Kj2ybI/AAAAAAAABLs/GcTCavEv-lc/s1600/Katy_Perry.jpg"
-
-    }
-]
-
+import Albums from './Albums/Albums.component'
 
 class Layout extends Component {
 
@@ -56,9 +14,10 @@ class Layout extends Component {
                 <div className="container">
                     <div className="content">
                         <Route path="/" exact={true} component={Collections} />
+                        <Route path="/albums"  component={Albums} />
                     </div>
-                    <div className="player">
-                    </div>
+                        <Player />
+                    <div className="spacer" /> 
                     <div className="navigation">
                         <Navigation />
                     </div>
