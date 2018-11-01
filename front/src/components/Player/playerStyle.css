@@ -1,26 +1,41 @@
 audio {
     display: none;
 }
-.player-content {
-    width: calc(100vw - 170px)
+.player-cover {
+    width: 100px;
+    height: 100px;
+}
+.player-cover img {
+    width: 100px;
 }
 .player-controls {
     height: 100px;
     width: 150px;
+    right: 120px;
+    top: 25px
 }
-.player-content, .player-controls {
+.player-data {
+    left: 150px;
+    padding: 15px;
+
+}
+.player-cover, .player-data, .player-controls {
     display: inline-block;
+    height: 100px;
+    position: absolute;
 }
-
-.player-content img {
-    width: 100px;
-}
-
 .player-controls i {
     font-size: 48px;
     top: 20px;
 }
-.player-controls {
-    position: relative;
-    top: -26px;
+
+.player_album-title, .player_album-artist {
+    padding-top:8px;
+}
+.player_album-title {
+    font-size: 24px;
+}
+
+.player_album-artist {
+    opacity: .6;
 }
