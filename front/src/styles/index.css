@@ -71,3 +71,10 @@
 .content {
     margin-bottom: 150px;
 }
+.player-progressbar-clickCollector {
+    position: absolute;
+    top: -10px;
+    width: 100vw;
+    height: 20px;
+    opacity: 0;
+}

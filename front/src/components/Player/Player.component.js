@@ -67,8 +67,18 @@ class Player extends Component {
     renderProgressBar() {
         return (
             <React.Fragment>
-                <div className="player-progressbar" />
+                <div className="player-progressbar" 
+                //onClick={e => {console.log(e.clientY  ); console.log(e.currentTarget.clientWidth)}}
+                />
                 <div className="player-progressbar-progress" style={{ width: `${this.props.progress}vw` }} />
+                <div className="player-progressbar-clickCollector" 
+                onClick={e => {
+                    const x = e.clientX;
+                    const width = e.currentTarget.clientWidth;
+                    const duration = this.music.current.duration;
+                    this.music.current.currentTime = x / width * duration;
+                }}
+                />
             </React.Fragment>
 
         )
