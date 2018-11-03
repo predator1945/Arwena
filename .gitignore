@@ -8,5 +8,6 @@ front/yarn-error.log
 front/yarn.lock
 backend/adminAPI/npm-debug.log
 *.pem
-*.mp3
+**/*.mp3
+**/*.mp3*
 
