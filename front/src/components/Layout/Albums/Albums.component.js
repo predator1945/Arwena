@@ -31,6 +31,7 @@ class Albums extends Component {
                     <h3>{this.props.artist.name}</h3>
                 </div>
                 <table>
+                    <tbody>
                     {this.props.songs.map((song, index) => {
                         return (
                             <tr
@@ -45,6 +46,7 @@ class Albums extends Component {
                             </tr>
                         )
                     })}
+                    </ tbody>
                 </table>
 
 
@@ -54,8 +56,8 @@ class Albums extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log('state update')
-    console.log(state)
+    // console.log('state update')
+    // console.log(state)
     return {
         ...state.albums,
         album: state.albums

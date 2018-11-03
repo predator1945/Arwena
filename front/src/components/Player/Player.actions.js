@@ -31,7 +31,18 @@ export function playTrackNo(no) {
         payload: {no}
     };
 }
-
+export const SET_PROGRESS = 'SET_PROGRESS';
+export function setProgress(progress) {
+    return dispatch => {
+        dispatch(setProgressSuccess(progress))
+    }
+}
+export function setProgressSuccess(progress) {
+    return {
+        type: SET_PROGRESS,
+        payload: progress
+    };
+}
 
 
 
