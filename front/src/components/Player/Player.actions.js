@@ -12,3 +12,27 @@ export function playSongSuccess(album, no) {
     };
 }
 
+export function playNext(no) {
+    return dispatch => {
+        dispatch(playTrackNo(no + 1))
+    }
+}
+
+export function playPrev(no) {
+    return dispatch => {
+        dispatch(playTrackNo(no - 1))
+    }
+}
+
+export const PLAY_TRACK_NO = 'PLAY_TRACK_NO';
+export function playTrackNo(no) {
+    return {
+        type: PLAY_TRACK_NO,
+        payload: {no}
+    };
+}
+
+
+
+
+

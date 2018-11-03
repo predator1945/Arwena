@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './playerStyle.css'
+import {playNext, playPrev} from './Player.actions';
+
 class Player extends Component {
 
     constructor(props) {
@@ -12,6 +14,8 @@ class Player extends Component {
     playMusic(source) {
         if (!this.props.album.songs) return;
 
+        console.log(source)
+
         if (source == 'button') {
             if (this.music.current.paused) {
                 this.music.current.play()
@@ -20,18 +24,29 @@ class Player extends Component {
                 this.music.current.pause()
                 document.getElementById('playBtn').innerText = "play_arrow"
             }
+        } else {
+            this.music.current.pause()
+
+            this.music.current.load()
+            this.music.current.play()
+
+            document.getElementById('playBtn').innerText = "pause"
         }
+    }
 
-        this.music.current.pause()
+    playNext() {
+        if(this.props.no + 1 >= this.props.album.songs.length) return;
 
-        this.music.current.load()
-        this.music.current.play()
+        this.props.playNext(this.props.no+1);
+        this.playMusic();
+    }
+    playPrev() {
 
-        document.getElementById('playBtn').innerText = "pause"
     }
 
     componentDidUpdate() {
-        this.playMusic("state");
+        console.log(this.props)
+        // this.playMusic("state");
 
     }
 
@@ -46,8 +61,10 @@ class Player extends Component {
                     id={"playBtn"}
                     onClick={this.playMusic.bind(this, "button")}
                 >play_arrow</i>
-                
-                <i class="material-icons">skip_next</i>
+
+                <i 
+                onClick={this.playNext.bind(this)}
+                class="material-icons">skip_next</i>
             </div>
         )
     }
@@ -82,17 +99,10 @@ class Player extends Component {
 
                 {this.renderControls()}
 
-
-
-
-
             </div >
         )
     }
-
-
 }
-
 
 const mapStateToProps = (state) => {
     return {
@@ -102,7 +112,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        playNext: (no) => dispatch(playNext(no)),
+        playPrev: (no) => dispatch(playPrev(no)),
     }
 }
 
