@@ -11,7 +11,7 @@ class Player extends Component {
         this.music = React.createRef();
     }
 
-    playMusic(source) {
+    playMusic = async (source) => {
         // console.log("state: " + this.music.current.paused)
         if (!this.props.album.songs) return;
 
@@ -27,8 +27,7 @@ class Player extends Component {
                 document.getElementById('playBtn').innerText = "play_arrow"
             }
         } else {
-            this.music.current.pause()
-
+            this.music.current.pause();
             this.music.current.load()
             this.music.current.play()
 
@@ -37,41 +36,41 @@ class Player extends Component {
         this.music.current.ontimeupdate = e => {
             const { currentTime, duration } = this.music.current
 
-            const {progress, setProgress} = this.props;
-            let currentProgress = (currentTime / duration)*300 + "";
+            const { progress, setProgress } = this.props;
+            let currentProgress = (currentTime / duration) * 300 + "";
             currentProgress = currentProgress.split('.')[0] / 3;
-            if(currentProgress != progress) 
-            setProgress(currentProgress);
+            if (currentProgress != progress)
+                setProgress(currentProgress);
 
         }
     }
 
     playNext() {
         if (this.props.no + 1 >= this.props.album.songs.length) return;
-        console.log(this.props.no + 1)
 
-        this.props.playNext(this.props.no + 1);
-        this.playMusic();
+        this.props.playNext(this.props.no);
     }
     playPrev() {
+        if (this.props.no == 0) return;
 
+        this.props.playPrev(this.props.no);
     }
 
     componentDidUpdate() {
-        const {currentSrc} = this.music.current
+        const { currentSrc } = this.music.current
 
-        if(currentSrc.split('/')[currentSrc.split('/').length-1] != this.props.album.songs[this.props.no].stream_url)
-        this.playMusic("state");
+        if (currentSrc.split('/')[currentSrc.split('/').length - 1] != this.props.album.songs[this.props.no].stream_url)
+            this.playMusic("state");
     }
 
 
     renderProgressBar() {
         return (
             <React.Fragment>
-            <div className="player-progressbar" />
-            <div className="player-progressbar-progress"  style={{width:`${this.props.progress}vw` }}/>
+                <div className="player-progressbar" />
+                <div className="player-progressbar-progress" style={{ width: `${this.props.progress}vw` }} />
             </React.Fragment>
-            
+
         )
     }
 
@@ -80,7 +79,9 @@ class Player extends Component {
         return (
             <div className="player-controls">
 
-                <i className="material-icons">skip_previous</i>
+                <i
+                    onClick={this.playPrev.bind(this)}
+                    className="material-icons">skip_previous</i>
 
                 <i className="material-icons"
                     id={"playBtn"}

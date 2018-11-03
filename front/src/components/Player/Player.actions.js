@@ -28,7 +28,7 @@ export const PLAY_TRACK_NO = 'PLAY_TRACK_NO';
 export function playTrackNo(no) {
     return {
         type: PLAY_TRACK_NO,
-        payload: {no}
+        payload: no
     };
 }
 export const SET_PROGRESS = 'SET_PROGRESS';

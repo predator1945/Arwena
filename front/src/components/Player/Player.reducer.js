@@ -7,7 +7,9 @@ export default function (state = { album: {}, no: 0, progress: 0 }, action) {
             return { ...state, ...action.payload };
 
         case PLAY_TRACK_NO:
-            return { ...state, no: action.payload }
+            return { ...state, 
+                no: action.payload 
+            }
 
         case SET_PROGRESS:
             return { ...state, progress: action.payload }
