@@ -10,7 +10,7 @@ docker rmi gate --force
 docker build -t gate .
 
 
-docker run -p 80:80 --name gate -d gate
+docker run -p 8081:80 --name gate -d gate
 docker logs -t -f gate
 # docker exec -it gate sh
 

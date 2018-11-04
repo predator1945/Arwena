@@ -1,3 +1,7 @@
 module.exports = {
-    "extends": "standard"
+    "extends": "standard",
+    "rules": {
+        "indent": ["error", "tab"],
+        "no-tabs": 0
+      }
 };

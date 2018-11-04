@@ -4,7 +4,9 @@
   "description": "API Gateway",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index"
+    "start": "node src/index",
+    "test": "mocha -R spec src/**/*.spec.js",
+    "lint": "node_modules/eslint/bin/eslint.js --ext .js --fix ."
   },
   "author": "Arkadiusz Szuflicki",
   "license": "ISC",
