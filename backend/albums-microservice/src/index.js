@@ -9,38 +9,38 @@ console.log('--- Albums Microservice ---')
 console.log('Connecting to albums repository')
 
 process.on('uncaughtException', (err) => {
-  console.error('Unhandled Exception', err)
-  process.exit(1)
+	console.error('Unhandled Exception', err)
+	process.exit(1)
 })
 
 process.on('uncaughtRejection', (err) => {
-  console.error('Unhandled Rejection', err)
-  process.exit(1)
+	console.error('Unhandled Rejection', err)
+	process.exit(1)
 })
 
 mediator.on('db.ready', db => {
-  let rep
-  repository.connect(db)
-    .then(repo => {
-      console.log('Connected. Starting Server')
-      rep = repo
-      return server.start({
-        port: config.serverSettings.port,
-        ssl: config.serverSettings.ssl,
-        repo
-      })
-    })
-    .then(app => {
-      console.log(`Server started succesfully, running on port: ${config.serverSettings.port}.`)
-      app.on('close', () => {
-        rep.disconnect()
-      })
-    })
+	let rep
+	repository.connect(db)
+		.then(repo => {
+			console.log('Connected. Starting Server')
+			rep = repo
+			return server.start({
+				port: config.serverSettings.port,
+				ssl: config.serverSettings.ssl,
+				repo
+			})
+		})
+		.then(app => {
+			console.log(`Server started succesfully, running on port: ${config.serverSettings.port}.`)
+			app.on('close', () => {
+				rep.disconnect()
+			})
+		})
 })
 
 mediator.on('db.error', err => {
-  console.error(err)
-  process.exit(1)
+	console.error(err)
+	process.exit(1)
 })
 
 config.db.connect(config.dbSettings, mediator)
