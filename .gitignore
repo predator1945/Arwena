@@ -10,4 +10,4 @@ backend/adminAPI/npm-debug.log
 *.pem
 **/*.mp3
 **/*.mp3*
-
+**/songs/*
