@@ -2,7 +2,7 @@ const dbSettings = {
   db: 'arwena',
   user: process.env.DB_USER || 'user',
   pass: process.env.DB_PASS || 'pass',
-  url: process.env.DB_SERVER || 'localhost:27017'
+  url: process.env.DB_SERVER || '192.168.99.100:27017'
 }
 
 const serverSettings = {
