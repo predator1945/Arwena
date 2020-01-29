@@ -1,0 +1,24 @@
+
+
+
+application {
+  config {
+    baseName albums,
+    applicationType microservice,
+    packageName com.app.albums,
+    authenticationType jwt,
+    buildTool maven,
+    serverPort 8081,
+    skipUserManagement true
+  }
+  entities Album
+}
+
+entity Album {
+    id Long required
+    title String required
+    details String
+    cover_minature String required
+    cover String required
+}
+
