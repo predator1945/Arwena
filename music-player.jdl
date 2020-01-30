@@ -18,7 +18,47 @@ entity Album {
     id Long required
     title String required
     details String
-    cover_minature String required
+    cover64 String required
     cover String required
+}
+
+application {
+  config {
+    baseName songs,
+    applicationType microservice,
+    packageName com.app.songs,
+    authenticationType jwt,
+    buildTool maven,
+    serverPort 8082,
+    skipUserManagement true
+  }
+  entities Song
+}
+
+entity Song {
+    id Long required
+    title String required
+    albumId Long required
+}
+
+application {
+  config {
+    baseName authors,
+    applicationType microservice,
+    packageName com.app.authors,
+    authenticationType jwt,
+    buildTool maven,
+    serverPort 8083,
+    skipUserManagement true
+  }
+  entities Author
+}
+
+entity Author {
+  id Long required
+  name String required
+  photo String required
+  details String required
+  bgPhoto String required
 }
 
