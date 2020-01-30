@@ -1,13 +1,1 @@
 node_modules/
-npm-debug.log
-backend/adminAPI/node_modules/
-backend/uploadService/node_modules/
-backend/streaming-service/node_modules
-front/public/
-front/yarn-error.log
-front/yarn.lock
-backend/adminAPI/npm-debug.log
-*.pem
-**/*.mp3
-**/*.mp3*
-**/songs/*
