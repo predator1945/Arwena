@@ -1,0 +1,22 @@
+body {
+  background-color: #232F2F;
+}
+.mainView {
+  
+}
+.sideBar {
+  background-color: #1A2323;
+  height: calc(100vh - 91px);
+  width: 230px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.nowPlayingBar {
+  background-color: #121818;
+
+  height: 91px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+}

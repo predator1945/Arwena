@@ -31,8 +31,8 @@
     "creationTimestamp": 1580363400046,
     "entitySuffix": "",
     "dtoSuffix": "DTO",
-    "otherModules": [],
-    "blueprints": []
+    "blueprints": [],
+    "otherModules": []
   },
   "entities": ["Song"]
 }
